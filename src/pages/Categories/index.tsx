@@ -1,5 +1,14 @@
+import { Outlet } from 'react-router-dom';
+import { HeaderMain } from '../../components/HeaderMain';
+
 export function Categories() {
   return (
-    <h1>Categories</h1>
+    <>
+      <HeaderMain
+        title='Listar Categorias'
+        buttonTitle='Cadastrar Nova Categoria'
+      />
+      <Outlet />
+    </>
   )
 }

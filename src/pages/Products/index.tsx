@@ -1,5 +1,14 @@
+import { Outlet } from "react-router-dom";
+import { HeaderMain } from "../../components/HeaderMain";
+
 export function Products() {
   return (
-    <h1>Products</h1>
+    <>
+      <HeaderMain
+        title='Listar Produtos'
+        buttonTitle='Cadastrar Novo Produto'
+      />
+      <Outlet />
+    </>
   )
 }

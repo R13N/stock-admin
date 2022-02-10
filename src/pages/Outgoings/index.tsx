@@ -1,5 +1,14 @@
+import { Outlet } from "react-router-dom";
+import { HeaderMain } from "../../components/HeaderMain";
+
 export function Outgoings() {
   return (
-    <h1>Outgoings</h1>
+    <>
+      <HeaderMain
+        title='Listar Retiradas'
+        buttonTitle='Cadastrar Nova Retirada'
+      />
+      <Outlet />
+    </>
   )
 }

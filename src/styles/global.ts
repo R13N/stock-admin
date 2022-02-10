@@ -104,6 +104,6 @@ export const Main = styled.main`
 
 export const Wrapper = styled.section`
   background: #dd0000;
-  margin: 2rem 3rem;
+  margin: 2rem 7rem;
   width: 100%;
 `
