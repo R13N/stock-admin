@@ -1,12 +1,49 @@
+import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Outlet } from "react-router-dom";
 import { ListProducts } from "../../components/Products/ListProducts";
+import { api } from "../../services/api";
 
 import { Header } from './styles';
 
+interface IProductProps {
+  id: string;
+  name: string;
+  description: string;
+  amount: number;
+  unit: string;
+  created_at: string;
+  id_category: string;
+}
+
 export function Products() {
 
-  // const titles = ["Nome", "Descrição", "Unidade", "Estoque"];
+  const [products, setProducts] = useState<IProductProps[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProductProps[]>([]);
+  const [filterValue, setFilterValue] = useState('');
+
+  function handleFilteringProducts(event: React.ChangeEvent<HTMLInputElement>) {
+    setFilterValue(event.target.value);
+    const newFilter = products.filter(value => {
+      return (
+        value.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+        value.description?.toLowerCase().includes(filterValue.toLowerCase())
+      )
+    })
+    setFilteredProducts(newFilter);
+  }
+
+  useEffect(() => {
+    if(filterValue === ""){
+      setFilteredProducts(products);
+    }
+  }, [filterValue, products])
+
+  useEffect(() => {
+    api.get("/products")
+    .then(response => setProducts(response.data));
+  }, [])
+
 
   return (
     <>
@@ -18,12 +55,14 @@ export function Products() {
           name="search" 
           id="search"
           placeholder="Pesquisar"
+          value={filterValue}
+          onChange={handleFilteringProducts}
         />
         <span>
           <FiSearch size={24}/>
         </span>
       </Header>
-      <ListProducts />
+      <ListProducts products={filteredProducts}/>
       <Outlet />
     </>
   )

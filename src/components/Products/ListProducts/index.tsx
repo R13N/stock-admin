@@ -1,7 +1,3 @@
-
-import { useEffect, useState } from "react";
-import { api } from "../../../services/api";
-
 import { Product } from "../Product";
 
 import { Container } from './styles';
@@ -14,13 +10,11 @@ interface IProductProps {
   amount?: number;
 }
 
-export function ListProducts() {
-  
-  const [products, setProducts] = useState<IProductProps[]>([]);
+interface IProductsListProps {
+  products: IProductProps[];
+}
 
-  useEffect(() => {
-    api.get("/products").then(response => {setProducts(response.data)});
-  }, [])
+export function ListProducts({products}: IProductsListProps) {
 
   return (
     <Container>
@@ -30,7 +24,7 @@ export function ListProducts() {
         <span>Unidade</span>
         <span>Estoque</span>
       </header>
-      {products.map(p => 
+      {products? products.map(p => 
         <Product 
           key={p.id}
           id={p.id}
@@ -39,7 +33,7 @@ export function ListProducts() {
           unit={p.unit}
           amount={p.amount}
         />
-      )}
+      ): <></>}
     </Container>
   )
 }
