@@ -1,13 +1,27 @@
+import { FiSearch } from 'react-icons/fi';
 import { Outlet } from 'react-router-dom';
-import { HeaderMain } from '../../components/HeaderMain';
+import { ListCategories } from '../../components/Categories/ListCategories';
+
+import { Header } from './styles';
 
 export function Categories() {
+
   return (
     <>
-      <HeaderMain
-        title='Listar Categorias'
-        buttonTitle='Cadastrar Nova Categoria'
-      />
+      <Header>
+        <h2>Listar Categorias</h2>
+        <button>Cadastrar Nova Categoria</button>
+        <input 
+          type="text" 
+          name="search" 
+          id="search"
+          placeholder="Pesquisar"
+        />
+        <span>
+          <FiSearch size={24}/>
+        </span>
+      </Header>
+      <ListCategories />
       <Outlet />
     </>
   )

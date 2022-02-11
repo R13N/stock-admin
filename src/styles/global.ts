@@ -4,8 +4,7 @@ export const GlobalStyle = createGlobalStyle`
   :root{
     --background: #F2F3F5;
     --background-bars: #31353E;
-    --primary: #23B8C1;
-    --primary-dark: #006066;
+    --primary: #006066;
     --white: #FFFFFF;
     --gray: #666666;
     --gray-200: #D7D7D7;
@@ -103,7 +102,7 @@ export const Main = styled.main`
 `
 
 export const Wrapper = styled.section`
-  background: #dd0000;
+  /* background: #dd0000; */
   margin: 2rem 7rem;
   width: 100%;
 `

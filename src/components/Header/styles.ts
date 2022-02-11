@@ -10,5 +10,5 @@ export const Container = styled.header`
   height: 8vh;
   padding: 0 5rem;
 
-  color: var(--primary-dark);
+  color: var(--primary);
 `

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const Container = styled.header`
+export const Header = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   /* background: green; */
-  padding: 1rem 2rem 0;
+  padding: 1rem 0 0;
 
   position: relative;
   h2 {
@@ -32,7 +32,8 @@ export const Container = styled.header`
 
   > span {
     position: absolute;
-    right: 3rem;
+    right: 1rem;
+    top: 1.5rem;
     color: #7A7A7A;
   }
 `

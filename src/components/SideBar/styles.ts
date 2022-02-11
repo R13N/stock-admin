@@ -19,7 +19,7 @@ export const Container = styled.aside`
 
       &.active {
         font-weight: bold;
-        color: var(--primary-dark);
+        color: var(--primary);
       }
     }
 

@@ -8,7 +8,7 @@ export const Container = styled.button`
   background: transparent;
 
   span {
-    color: var(--primary-dark);
+    color: var(--primary);
     font-weight: bold;
     font-size: 1rem;
     margin-right: 1rem;
