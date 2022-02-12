@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Outlet } from "react-router-dom";
 import { ListProducts } from "../../components/Products/ListProducts";
+import { NewProductModal } from "../../components/Products/NewProductModal";
 import { api } from "../../services/api";
 
 import { Header } from './styles';
@@ -22,6 +23,18 @@ export function Products() {
   const [filteredProducts, setFilteredProducts] = useState<IProductProps[]>([]);
   const [filterValue, setFilterValue] = useState('');
 
+  // MODAL MANAGEMENT
+  const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false);
+
+  function handleOpenNewProductModal() {
+    setIsNewProductModalOpen(true);
+  }
+
+  function handleCloseNewProductModal() {
+    setIsNewProductModalOpen(false);
+    updateList();
+  }
+
   function handleFilteringProducts(event: React.ChangeEvent<HTMLInputElement>) {
     setFilterValue(event.target.value);
     const newFilter = products.filter(value => {
@@ -33,6 +46,11 @@ export function Products() {
     setFilteredProducts(newFilter);
   }
 
+  function updateList() {
+    api.get("/products")
+    .then(response => setProducts(response.data));
+  }
+
   useEffect(() => {
     if(filterValue === ""){
       setFilteredProducts(products);
@@ -40,16 +58,23 @@ export function Products() {
   }, [filterValue, products])
 
   useEffect(() => {
-    api.get("/products")
-    .then(response => setProducts(response.data));
+    updateList();
   }, [])
-
 
   return (
     <>
+      <NewProductModal 
+        isOpen={isNewProductModalOpen}
+        onRequestClose={handleCloseNewProductModal} 
+      />
+      
       <Header>
-        <h2>Listar Categorias</h2>
-        <button>Cadastrar Nova Categoria</button>
+        <h2>Listar Produtos</h2>
+        <button
+          onClick={handleOpenNewProductModal}
+        >
+          Cadastrar Novo Produto
+        </button>
         <input 
           type="text" 
           name="search" 

@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: space-between;
 
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 1rem;
 
   border-top: 1px solid var(--primary);
 

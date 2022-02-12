@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { Outlet } from 'react-router-dom';
 import { ListCategories } from '../../components/Categories/ListCategories';
+import { NewCategoryModal } from '../../components/Categories/NewCategoryModal';
 import { api } from '../../services/api';
 
 import { Header } from './styles';
@@ -18,6 +19,17 @@ export function Categories() {
   const [categories, setCategories] = useState<ICategoryProps[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<ICategoryProps[]>([]);
   const [filterValue, setFilterValue] = useState('');
+  // NEWCATEGORY MODAL MANAGEMENT
+  const [isNewCategoryModalOpen, setIsNewCategoryModalOpen] = useState(false);
+
+  function handleOpenNewCategoryModal() {
+    setIsNewCategoryModalOpen(true);
+  }
+
+  function handleCloseNewCategoryModal() {
+    setIsNewCategoryModalOpen(false);
+    updateList();
+  }
 
   function handleFilteringCategories(event: React.ChangeEvent<HTMLInputElement>) {
     setFilterValue(event.target.value);
@@ -30,6 +42,11 @@ export function Categories() {
     setFilteredCategories(newFilter);
   }
 
+  function updateList() {
+    api.get("/categories/filter")
+    .then(response => setCategories(response.data));
+  }
+
   useEffect(() => {
     if(filterValue === ""){
       setFilteredCategories(categories);
@@ -37,15 +54,22 @@ export function Categories() {
   }, [filterValue, categories])
 
   useEffect(() => {
-    api.get("/categories/filter")
-    .then(response => setCategories(response.data));
+    updateList();
   }, [])
 
   return (
     <>
+      <NewCategoryModal 
+        isOpen={isNewCategoryModalOpen}
+        onRequestClose={handleCloseNewCategoryModal} 
+      />
       <Header>
         <h2>Listar Categorias</h2>
-        <button>Cadastrar Nova Categoria</button>
+        <button
+          onClick={handleOpenNewCategoryModal}
+        >
+          Cadastrar Nova Categoria
+        </button>
         <input 
           type="text" 
           name="search" 
