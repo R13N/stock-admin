@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: space-between;
 
   width: 100%;
-  padding-top: 0.5rem;
+  padding-top: 1rem;
 
   border-top: 1px solid var(--primary);
 
@@ -16,8 +16,7 @@ export const Container = styled.div`
 
   > header {
     display: grid;
-    grid-template-columns: 2fr 4fr 2fr 2fr;
-    gap: 0.5rem;
+    grid-template-columns: 2fr 4fr;
     width: 100%;
   }
 
@@ -26,4 +25,6 @@ export const Container = styled.div`
     background: transparent;
     color: var(--primary);
   }
+
+
 `

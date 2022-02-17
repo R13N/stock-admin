@@ -33,43 +33,44 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
   const [amount, setAmount] = useState<number | null>();
   const [foundProduct, setFoundProduct] = useState<IProduct>();
 
-  async function getProduct(){
-    await api.get(`/products/${id}`)
-    .then(response => setFoundProduct(response.data))
-    .catch(error => console.log(error.message))
-    
-    if(foundProduct){
-      setName(foundProduct?.name);
-      setAmount(foundProduct.amount);
-      setCategoryName(foundProduct.category.name);
-      if(foundProduct.unit){
-        setUnit(foundProduct.unit)
-      }
-      if(foundProduct.description){
-        setDescription(foundProduct?.description);
-      }
-    }
-  }
-  
-  
-  async function submitFormData(event: FormEvent) {
+  function submitFormData(event: FormEvent) {
     event.preventDefault();
 
-    await api.put(`/products/${id}`, {name, description, unit, category_name: categoryName, amount})
-      .then(() => alert("Produto cadastrado com sucesso!"))
-      .then(() => onRequestClose())
-      .catch(error => console.log(error.message))
+    // console.log({"name": name});
+    // console.log({"description": description});
+    // console.log({"category name": categoryName});
+    // console.log({"amount": amount});
+    // console.log({"foundProduct": foundProduct});
 
+    api.put(`/products/${id}`, {
+      id, 
+      "name": name, 
+      "description": description, 
+      "unit": unit, 
+      "category_name": categoryName, 
+      "amount": amount
+    })
+      .then(() => alert("Produto alterado com sucesso!"))
+      .then(() => onRequestClose())
+      .catch(error => alert(error.message))
+
+
+    resetForm();
+  }
+    
+  function resetForm() {
     setName('');
     setDescription('');
     setUnit('');
     setCategoryName('');
-    setAmount(null);
+    setAmount(null);  
   }
 
   useEffect(() => {
-    getProduct();
-  },)
+    api.get(`/products/${id}`)
+    .then(response => setFoundProduct(response.data))
+    .catch(error => alert(error.message))
+  },[id])
 
   return(
     <Modal
@@ -77,6 +78,7 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
       onRequestClose={onRequestClose}
       overlayClassName= 'react-modal-overlay'
       className= 'react-modal-content'
+      ariaHideApp={false}
     >
         <Container>
           <Form onSubmit={submitFormData}>
@@ -88,7 +90,7 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
                 id='name' 
                 name='name'
                 onChange={event => setName(event.target.value)}
-                value={foundProduct?.name}
+                defaultValue={foundProduct?.name}
                 required
               />
             </Row>
@@ -99,7 +101,7 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
                 name="category_name" 
                 id="category_name"
                 onChange={event => setCategoryName(event.target.value)}
-                value={foundProduct?.category.name}
+                defaultValue={foundProduct?.category.name}
               />
             </Row>
             <Row>
@@ -109,7 +111,7 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
                 name="amount" 
                 id="amount"
                 onChange={event => setAmount(Number(event.target.value))}
-                value={foundProduct?.amount}
+                defaultValue={foundProduct?.amount}
               />
             </Row>
             <Row>
@@ -119,7 +121,7 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
                 name="unit" 
                 id="unit"
                 onChange={event => setUnit(event.target.value)}
-                value={foundProduct?.unit}
+                defaultValue={foundProduct?.unit}
               />
             </Row>
             <Row>
@@ -130,7 +132,7 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
                 cols={20} 
                 rows={5}
                 onChange={event => setDescription(event.target.value)}
-                value={foundProduct?.description}
+                defaultValue={foundProduct?.description}
               />
             </Row>
             <button>

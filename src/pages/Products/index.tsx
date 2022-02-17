@@ -46,8 +46,8 @@ export function Products() {
     setFilteredProducts(newFilter);
   }
 
-  function updateList() {
-    api.get("/products")
+  async function updateList() {
+    await api.get("/products")
     .then(response => setProducts(response.data));
   }
 

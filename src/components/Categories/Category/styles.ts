@@ -17,6 +17,7 @@ export const Container = styled.div`
   > header {
     display: grid;
     grid-template-columns: 2fr 4fr;
+    width: 100%;
   }
 
   > button {

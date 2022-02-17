@@ -23,7 +23,7 @@ export function NewProductModal({ isOpen, onRequestClose }: INewProductModalProp
     await api.post("/products/newproduct", {name, description, unit, category_name: categoryName})
       .then(() => alert("Produto cadastrado com sucesso!"))
       .then(() => onRequestClose())
-      .catch(error => console.log(error.message))
+      .catch(error => alert(error.message))
 
     setName('');
     setDescription('');

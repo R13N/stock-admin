@@ -5,26 +5,27 @@ import { api } from '../../../services/api';
 
 import { Container, Form, Row } from './styles';
 
-interface INewCategoryModalProps {
+interface INewIncomingModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
 }
 
-export function NewCategoryModal({ isOpen, onRequestClose }: INewCategoryModalProps){
+export function NewIncomingModal({ isOpen, onRequestClose }: INewIncomingModalProps){
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const type = "entrada";
+  const [nf, setNf] = useState('');
+  const [company, setCompany] = useState('');
 
   async function submitFormData(event: FormEvent) {
     event.preventDefault();
 
-    await api.post("/categories/newcategory", {name, description})
-      .then(() => alert("Categoria criada com sucesso!"))
+    await api.post("/orders/neworder", {type, nf, company})
+      .then(() => alert("Entrada criada com sucesso, agora preencha a lista de produtos."))
       .then(() => onRequestClose())
       .catch(error => alert(error.message))
 
-    setName('');
-    setDescription('');
+    setNf('');
+    setCompany('');
   }
 
   return(
@@ -33,28 +34,29 @@ export function NewCategoryModal({ isOpen, onRequestClose }: INewCategoryModalPr
       onRequestClose={onRequestClose}
       overlayClassName= 'react-modal-overlay'
       className= 'react-modal-content'
+      ariaHideApp={false}
     >
         <Container>
           <Form onSubmit={submitFormData}>
-            <span>Nova Categoria</span>
+            <span>Nova Entrada</span>
             <Row>
-              <label htmlFor="name">Nome</label>
+              <label htmlFor="nf">Nota Fiscal</label>
               <input 
                 type="text" 
-                id='name' 
-                name='name'
-                onChange={event => setName(event.target.value)}
+                id='nf' 
+                name='nf'
+                onChange={event => setNf(event.target.value)}
                 required
               />
             </Row>
             <Row>
-              <label htmlFor="description">Descrição breve</label>
-              <textarea 
-                name="description" 
-                id="description" 
-                cols={20} 
-                rows={5}
-                onChange={event => setDescription(event.target.value)}
+              <label htmlFor="company">Empresa</label>
+              <input
+                type="text" 
+                name="company" 
+                id="company" 
+                onChange={event => setCompany(event.target.value)}
+                required
               />
             </Row>
             <button>
