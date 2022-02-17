@@ -16,7 +16,7 @@ export const Container = styled.div`
 
   > header {
     display: grid;
-    grid-template-columns: 2fr 4fr;
+    grid-template-columns: 2fr 4fr 1fr;
     width: 100%;
   }
 

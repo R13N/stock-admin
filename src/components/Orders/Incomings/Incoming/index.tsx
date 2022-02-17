@@ -30,7 +30,7 @@ export function Incoming({ id, company, nf, type, created_at }: IIncomingProps) 
         onRequestClose={handleCloseEditCategoryModal}
       /> */}
       <header>
-        <span>{created_at}</span>
+        <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
         <span>{company}</span>
         <span>{nf}</span>
       </header>

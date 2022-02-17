@@ -7,7 +7,7 @@ export const Container = styled.section`
 
   > header {
     display: grid;
-    grid-template-columns: 2fr 4fr;
+    grid-template-columns: 2fr 4fr 1fr;
     
     margin-top: 2rem;
     

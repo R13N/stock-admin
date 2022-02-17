@@ -33,6 +33,7 @@ export function NewCategoryModal({ isOpen, onRequestClose }: INewCategoryModalPr
       onRequestClose={onRequestClose}
       overlayClassName= 'react-modal-overlay'
       className= 'react-modal-content'
+      ariaHideApp={false}
     >
         <Container>
           <Form onSubmit={submitFormData}>

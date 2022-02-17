@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { FiSave } from 'react-icons/fi';
 import Modal from 'react-modal';
-import { api } from '../../../services/api';
+import { api } from '../../../../services/api';
 
 import { Container, Form, Row } from './styles';
 

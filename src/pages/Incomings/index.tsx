@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Outlet } from "react-router-dom";
-import { ListIncomings } from "../../components/Orders/ListIncomings";
-import { NewIncomingModal } from "../../components/Orders/NewIncomingModal";
+import { ListIncomings } from "../../components/Orders/Incomings/ListIncomings";
+import { NewIncomingModal } from "../../components/Orders/Incomings/NewIncomingModal";
 import { api } from "../../services/api";
 
 import { Header } from "./styles";
