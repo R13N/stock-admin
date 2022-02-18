@@ -7,7 +7,6 @@ export const Header = styled.header`
   align-items: center;
   /* background: green; */
   padding: 1rem 0 0;
-
   position: relative;
   h2 {
     color: #7A7A7A;

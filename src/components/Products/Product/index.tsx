@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { EditProductModal } from "../EditProductModal";
 
@@ -22,16 +22,11 @@ export function Product({id, name, description, unit, amount}: IProduct) {
 
   function handleCloseEditProductModal() {
     setIsEditProductModalOpen(false);
-    updateList();
-  }
-
-  function updateList(){
-
   }
 
   return (
     <Container>
-      <EditProductModal 
+      <EditProductModal
         isOpen={isEditProductModalOpen}
         onRequestClose={handleCloseEditProductModal} 
         id={id}

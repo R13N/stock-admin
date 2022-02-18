@@ -15,12 +15,36 @@ export const Container = styled.div`
   }
 
   > header {
-    display: grid;
-    grid-template-columns: 2fr 4fr;
     width: 100%;
+    > div {
+      display: grid;
+      grid-template-columns: 2fr 4fr;
+      width: 100%;
+    }
+
+    > form {
+      display: grid;
+      grid-template-columns: 3fr 5fr 1fr;
+
+      /* width: calc(100% - 24px); */
+
+      > input {
+        padding: 0.5rem 1rem;
+        margin: 0 1rem 0.5rem 0;
+        border-radius: 0.25rem;
+        border: none;
+
+        background: #DCDCDC;
+        font-size: 1rem;
+
+        &:last-child {
+          width: 100%;
+        }
+      }
+    }
   }
 
-  > button {
+  button {
     border: none;
     background: transparent;
     color: var(--primary);

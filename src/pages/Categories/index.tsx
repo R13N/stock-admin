@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { Outlet } from 'react-router-dom';
+import { EditCategoryModal } from '../../components/Categories/EditCategoryModal';
 import { ListCategories } from '../../components/Categories/ListCategories';
 import { NewCategoryModal } from '../../components/Categories/NewCategoryModal';
 import { api } from '../../services/api';
@@ -30,6 +31,20 @@ export function Categories() {
     setIsNewCategoryModalOpen(false);
     updateList();
   }
+
+  // EDITCATEGORY MODAL MANAGEMENT
+  // const [isEditCategoryModalOpen, setIsEditCategoryModalOpen] = useState(false);
+  // const [id, setId] = useState('');
+
+  // function handleCloseEditCategoryModal() {
+  //   setIsEditCategoryModalOpen(false);
+  // }
+
+  // function handleOpenEditCategoryModal(id: string) {
+  //   setIsEditCategoryModalOpen(true);
+  //   setId(id)
+  // }
+
 
   function handleFilteringCategories(event: React.ChangeEvent<HTMLInputElement>) {
     setFilterValue(event.target.value);
@@ -63,6 +78,11 @@ export function Categories() {
         isOpen={isNewCategoryModalOpen}
         onRequestClose={handleCloseNewCategoryModal} 
       />
+      {/* <EditCategoryModal
+        id={id}
+        isOpen={isEditCategoryModalOpen}
+        onRequestClose={handleCloseEditCategoryModal}
+      /> */}
       <Header>
         <h2>Listar Categorias</h2>
         <button
@@ -82,7 +102,10 @@ export function Categories() {
           <FiSearch size={24}/>
         </span>
       </Header>
-      <ListCategories categories={filteredCategories}/>
+      <ListCategories 
+        categories={filteredCategories}
+        // onOpenEditCategoryModal={handleOpenEditCategoryModal}
+      />
       <Outlet />
     </>
   )

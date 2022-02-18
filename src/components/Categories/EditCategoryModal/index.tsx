@@ -1,9 +1,8 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { FiSave } from "react-icons/fi";
 import Modal from 'react-modal';
 
 import { api } from "../../../services/api";
-import { useFetch } from "../../../hooks/useFetch";
 
 import { Container, Form, Row } from './styles';
 
@@ -23,10 +22,11 @@ export function EditCategoryModal({ id, isOpen, onRequestClose }: IEditCategoryM
 
   const [updatedName, setUpdatedName] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
+  const [category, setCategory] = useState<ICategory>(Object); 
   
-  const { data } = useFetch<ICategory>(`categories/${id}`);
-  console.log(data);
-  // console.log(id);
+  if(updatedDescription === '') {
+    setUpdatedDescription(category?.description)
+  }
 
   function submitFormData(event: FormEvent) {
     event.preventDefault();
@@ -34,24 +34,23 @@ export function EditCategoryModal({ id, isOpen, onRequestClose }: IEditCategoryM
     api.put(`/categories/editcategory/${id}`, { id, "name": updatedName, "description": updatedDescription})
     .then(() => alert("Categoria alterada com sucesso!"))
     .then(() => onRequestClose())
-    .catch(error => alert(`${error.message}`))
-
   }
 
   function handleChangeName(e: React.ChangeEvent<HTMLInputElement>) {
-    setUpdatedName(e.target.value)
-    console.log(updatedName)
-    if(updatedName === null && data) {
-      setUpdatedName(data?.name)
+    if(e.target.value === '') {
+      setUpdatedName(e.target.defaultValue)
     }
+    setUpdatedName(e.target.value)
   }
 
   function handleChangeDescription(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setUpdatedDescription(e.target.value)
-    if(updatedDescription === null && data) {
-      setUpdatedDescription(data?.description)
-    }
   }
+
+  useEffect(() => {
+    api.get(`categories/${id}`)
+    .then(response => setCategory(response.data))
+  }, [id])
 
   return(
     <Modal
@@ -62,15 +61,15 @@ export function EditCategoryModal({ id, isOpen, onRequestClose }: IEditCategoryM
       ariaHideApp={false}
     >
       <Container>
-        <Form onSubmit={submitFormData} key={data?.id}>
-          <span>Editar {data?.name}</span>
+        <Form onSubmit={submitFormData} key={category?.id}>
+          <span>Editar {category?.name}</span>
           <Row>
             <label htmlFor="name">Nome</label>
             <input 
               type="text"
               id="name"
               name="name"
-              defaultValue={data?.name}
+              defaultValue={category?.name}
               onChange={handleChangeName}
               required
             />
@@ -82,7 +81,7 @@ export function EditCategoryModal({ id, isOpen, onRequestClose }: IEditCategoryM
                 id="description" 
                 cols={20} 
                 rows={5}
-                defaultValue={data?.description}
+                defaultValue={category?.description}
                 onChange={handleChangeDescription}
               />
             </Row>

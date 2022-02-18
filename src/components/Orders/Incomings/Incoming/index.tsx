@@ -1,5 +1,6 @@
-import { FiMoreVertical } from "react-icons/fi";
-import { Container } from "./styles";
+import { FiEdit } from "react-icons/fi";
+import { ListProductsOrder } from "../../ProductsOrder/ListProductsOrder";
+import { Container, Content } from "./styles";
 
 interface IIncomingProps {
   id: string;
@@ -24,21 +25,26 @@ export function Incoming({ id, company, nf, type, created_at }: IIncomingProps) 
 
   return (
     <Container>
-      {/* <EditCategoryModal
+      <Content>
+        {/* <EditCategoryModal
+          id={id}
+          isOpen={isEditCategoryModalOpen}
+          onRequestClose={handleCloseEditCategoryModal}
+        /> */}
+        <header>
+          <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
+          <span>{company}</span>
+          <span>{nf}</span>
+        </header>
+        <button
+          // onClick={handleOpenEditCategoryModal}
+          >
+          <FiEdit size={24}/>
+        </button>
+        </Content>
+      <ListProductsOrder
         id={id}
-        isOpen={isEditCategoryModalOpen}
-        onRequestClose={handleCloseEditCategoryModal}
-      /> */}
-      <header>
-        <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
-        <span>{company}</span>
-        <span>{nf}</span>
-      </header>
-      <button
-        // onClick={handleOpenEditCategoryModal}
-      >
-        <FiMoreVertical size={24}/>
-      </button>
+        />
     </Container>
   )
 }

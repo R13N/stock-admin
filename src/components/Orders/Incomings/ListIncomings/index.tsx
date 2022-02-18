@@ -1,6 +1,6 @@
 
 import { Incoming } from '../Incoming';
-import { Container } from './styles';
+import { Container, Content } from './styles';
 
 interface IIncomingProps {
   id: string;
@@ -23,16 +23,18 @@ export function ListIncomings({incomings}: IIncomingsListProps) {
         <span>Empresa</span>  
         <span>NF</span>  
       </header>
+      <Content>
       {incomings? incomings.map(i => 
         <Incoming
-          key={i.id}
-          id={i.id}
-          type={i.type}
-          company={i.company}
-          nf={i.nf}
-          created_at={i.created_at}
+        key={i.id}
+        id={i.id}
+        type={i.type}
+        company={i.company}
+        nf={i.nf}
+        created_at={i.created_at}
         />
-      ): <></>}
+        ): <></>}
+      </Content>
     </Container>
   )
 }

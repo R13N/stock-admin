@@ -42,14 +42,9 @@ export function Outgoings() {
   }
 
   async function updateList() {
-    await api.get("/orders/filter", 
-      {
-        params: {"type": "saida"},
-        headers: {'Content-Type': 'application/json'}
-      }
-    )
+    await api.get("/orders/filter", { params: {"type": "saida"}})
     .then(response => setOutgoings(response.data))
-    .then(response => console.log(response))
+    // .then(response => console.log(response))
   }
   // console.log(outgoings)
 
@@ -70,11 +65,11 @@ export function Outgoings() {
         onRequestClose={handleCloseNewOutgoingModal}
       />
       <Header>
-        <h2>Listar Entradas</h2>
+        <h2>Listar Retiradas</h2>
         <button
           onClick={handleOpenNewOutgoingModal}
         >
-          Cadastrar Nova Entrada
+          Cadastrar Nova Retirada
         </button>
         <input 
           type="text" 

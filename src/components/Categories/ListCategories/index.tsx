@@ -10,6 +10,7 @@ interface ICategoryProps {
 
 interface ICategoryListProps {
   categories: ICategoryProps[];
+  // onOpenEditCategoryModal: (id: string) => void;
 }
 
 export function ListCategories({categories}: ICategoryListProps) {
@@ -26,6 +27,7 @@ export function ListCategories({categories}: ICategoryListProps) {
           id={c.id}
           name={c.name}
           description={c.description}
+          // onOpenEditCategoryModal={onOpenEditCategoryModal}
         />
       ): <></>}
     </Container>

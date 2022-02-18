@@ -18,3 +18,8 @@ export const Container = styled.section`
     }
   }
 `
+
+export const Content = styled.div`
+  /* overflow-y: scroll; */
+  /* height: 100%; */
+`
