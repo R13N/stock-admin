@@ -20,9 +20,9 @@ export const Container = styled.div`
     gap: 0.5rem;
     width: 100%;
 
-    &:(last-child) {
+    span:last-child {
       text-align: right;
-      padding-right: 0;
+      padding-right: 24px;
     }
   }
 
@@ -34,8 +34,8 @@ export const Container = styled.div`
     margin-right: 1rem;
 
     > input {
-      padding: 0.5rem 1rem;
-      margin: 0 1rem 0.5rem 0;
+      padding: 0rem 1rem;
+      /* margin: 0 1rem 0.5rem 0; */
       border-radius: 0.25rem;
       border: none;
       

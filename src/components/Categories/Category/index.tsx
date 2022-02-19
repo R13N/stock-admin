@@ -10,7 +10,6 @@ interface ICategory {
   id: string;
   name: string;
   description?: string;
-  // onOpenEditCategoryModal: (id: string) => void;
 }
 
 interface IUpdateCategory {
@@ -109,8 +108,8 @@ export function Category({id, name, description }: ICategory) {
           <FiX size={24}/>
         </button> :
         <button
-        onClick={toggleOpenEdit}
-        title="Editar"
+          onClick={toggleOpenEdit}
+          title="Editar"
         >
           <FiEdit size={24}/>
         </button> 

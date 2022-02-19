@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiChevronUp } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiSave } from "react-icons/fi";
 import { api } from "../../../../services/api";
 import { ProductOrder } from "../ProductOrder";
 
@@ -18,7 +18,21 @@ interface IListProductsOrderProps {
 
 export function ListProductsOrder({id}:IListProductsOrderProps) {
 
+  const [productName, setProductName] = useState('');
+  const [productAmount, setProductAmount] = useState(0);
+
   const [productsList, setProductsList] = useState<IProductOrderProps[]>([]);
+  const [isActive, setIsActive] = useState(false);
+
+  function toggleIsActive() {
+    setIsActive(!isActive);
+  }
+
+  function onSubmitNewProductOrder() {
+    api.post(`/orders/newproduct/${id}`, {id, "product_name": productName, "amount": productAmount})
+      .then(() => alert("Produto adicionado com sucesso!"))
+      .then(() => window.location.reload())
+  }
   
   useEffect(() => {
     api.get(`/orders/${id}`)
@@ -32,14 +46,19 @@ export function ListProductsOrder({id}:IListProductsOrderProps) {
         <span>Descrição</span>
         <span>Unidade</span>
         <span>Quant.</span>
-        <button>
-          <FiChevronUp size={24}/>
+
+        <button
+          onClick={toggleIsActive}
+        >
+          {isActive ? <FiChevronUp size={24}/> : <FiChevronDown size={24}/>}
         </button>
+
       </header>
-      {productsList ? productsList.map(p => 
+      {productsList && isActive ? productsList.map(p => 
         <ProductOrder 
           key={p.id}
-          id={p.id_product}
+          productorder_id={p.id}
+          product_id={p.id_product}
           amount={p.amount}
         />
       ): <></>}
@@ -50,15 +69,21 @@ export function ListProductsOrder({id}:IListProductsOrderProps) {
             name="product_name" 
             id="product_name" 
             placeholder="Nome do produto"
+            onChange={e => setProductName(e.target.value)}
           />
           <input 
             type="number" 
             name="amount" 
             id="amount" 
             placeholder="Quantidade"
+            onChange={e => setProductAmount(Number(e.target.value))}
           />
         </div>
-        <button>Adicionar</button>
+        <button
+          onClick={onSubmitNewProductOrder}
+        >
+          <FiSave size={24}/>
+        </button>
       </Form>
     </Container>
   )

@@ -26,12 +26,12 @@ export function ListIncomings({incomings}: IIncomingsListProps) {
       <Content>
       {incomings? incomings.map(i => 
         <Incoming
-        key={i.id}
-        id={i.id}
-        type={i.type}
-        company={i.company}
-        nf={i.nf}
-        created_at={i.created_at}
+          key={i.id}
+          id={i.id}
+          type={i.type}
+          company={i.company}
+          nf={i.nf}
+          created_at={i.created_at}
         />
         ): <></>}
       </Content>

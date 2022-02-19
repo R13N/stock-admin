@@ -76,9 +76,10 @@ export const Main = styled.main`
 
 export const Wrapper = styled.section`
   /* background: #dd0000; */
-  padding: 2rem 7rem;
+  padding: 2rem 7rem 13rem 7rem;
   width: calc(100% - 13rem);
   position: absolute;
   right: 0;
   overflow-y: hidden;
+  /* margin-bottom: 5rem; */
 `

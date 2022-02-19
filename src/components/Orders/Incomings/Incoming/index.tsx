@@ -26,11 +26,6 @@ export function Incoming({ id, company, nf, type, created_at }: IIncomingProps) 
   return (
     <Container>
       <Content>
-        {/* <EditCategoryModal
-          id={id}
-          isOpen={isEditCategoryModalOpen}
-          onRequestClose={handleCloseEditCategoryModal}
-        /> */}
         <header>
           <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
           <span>{company}</span>
@@ -41,10 +36,10 @@ export function Incoming({ id, company, nf, type, created_at }: IIncomingProps) 
           >
           <FiEdit size={24}/>
         </button>
-        </Content>
+      </Content>
       <ListProductsOrder
         id={id}
-        />
+      />
     </Container>
   )
 }
