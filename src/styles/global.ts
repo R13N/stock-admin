@@ -66,33 +66,6 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
 
   }
-
-  /* .react-modal-content {
-    width: 100%;
-    max-width: 100px;
-    background: var(--background);
-    padding: 3rem;
-    position: relative;
-    border-radius: 1rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-
-  /* .react-modal-close {
-    position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
-    border: 0;
-    background: transparent;
-
-    transition: filter 0.2s;
-
-    &:hover {
-    filter: brightness(0.8);
-    } 
-  } */
 `
 
 export const Main = styled.main`
@@ -103,6 +76,9 @@ export const Main = styled.main`
 
 export const Wrapper = styled.section`
   /* background: #dd0000; */
-  margin: 2rem 7rem;
-  width: 100%;
+  padding: 2rem 7rem;
+  width: calc(100% - 13rem);
+  position: absolute;
+  right: 0;
+  overflow-y: hidden;
 `

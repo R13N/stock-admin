@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
-import { FiEdit, FiSave } from "react-icons/fi";
+import { FiEdit, FiSave, FiX } from "react-icons/fi";
 import { api } from "../../../services/api";
 
 // import { EditCategoryModal } from "../EditCategoryModal";
@@ -25,8 +25,10 @@ export function Category({id, name, description }: ICategory) {
 
   const [updatedName, setUpdatedName] = useState('');
   const [updatedDescription, setUpdatedDescription] = useState('');
+
   const [category, setCategory] = useState<IUpdateCategory>(Object); 
   
+  // if nothing comes from the inputs, the original data will be submitted
   if(updatedDescription === '') {
     setUpdatedDescription(category?.description)
   }
@@ -35,36 +37,29 @@ export function Category({id, name, description }: ICategory) {
     setUpdatedName(category?.name)
   }
 
-  function submitFormData(event: FormEvent) {
+  function toggleOpenEdit() {
+    setIsEdit(!isEdit);
+  }
+
+  function onSubmitFormData(event: FormEvent) {
     event.preventDefault();
 
-    api.put(`/categories/editcategory/${id}`, { id, "name": updatedName, "description": updatedDescription})
+    api.put(`/categories/editcategory/${id}`, { 
+      id, 
+      "name": updatedName, 
+      "description": updatedDescription
+    })
     .then(() => alert("Categoria alterada com sucesso!"))
 
     setUpdatedName('');
     setUpdatedDescription('');
-    toogleOpenEdit();
+    toggleOpenEdit();
     updateList(id);
     window.location.reload();
   }
 
-  function handleChangeName(e: React.ChangeEvent<HTMLInputElement>) {
-    if(e.target.value === '') {
-      setUpdatedName(e.target.defaultValue)
-    }
-    setUpdatedName(e.target.value)
-  }
-
-  function handleChangeDescription(e: React.ChangeEvent<HTMLInputElement>) {
-    setUpdatedDescription(e.target.value)
-  }
-
-  function toogleOpenEdit() {
-    setIsEdit(!isEdit);
-  }
-
   function updateList(id: string) {
-    api.get(`categories/${id}`)
+    api.get(`/categories/${id}`)
     .then(response => setCategory(response.data))
   }
 
@@ -77,14 +72,14 @@ export function Category({id, name, description }: ICategory) {
       <header>
         { isEdit ?
           <>
-            <form onSubmit={submitFormData} key={category?.id}>
+            <form onSubmit={onSubmitFormData}>
               <input 
                 type="text" 
                 name="name" 
                 id="name" 
                 placeholder="Nome"
                 defaultValue={category?.name}
-                onChange={handleChangeName}
+                onChange={e => setUpdatedName(e.target.value)}
               />
               <input 
                 type="text" 
@@ -92,7 +87,7 @@ export function Category({id, name, description }: ICategory) {
                 id="description" 
                 placeholder="Descrição"
                 defaultValue={category?.description}
-                onChange={handleChangeDescription}
+                onChange={e => setUpdatedDescription(e.target.value)}
               />
               <button type="submit">
                 <FiSave size={24}/>
@@ -106,12 +101,20 @@ export function Category({id, name, description }: ICategory) {
           </div>
         }
       </header>
-      <button
-        onClick={toogleOpenEdit}
+      {isEdit ? 
+        <button
+          onClick={toggleOpenEdit}
+          title="Fechar"
+        >
+          <FiX size={24}/>
+        </button> :
+        <button
+        onClick={toggleOpenEdit}
         title="Editar"
-      >
-        <FiEdit size={24}/>
-      </button>
+        >
+          <FiEdit size={24}/>
+        </button> 
+      }
     </Container>
   )
 }

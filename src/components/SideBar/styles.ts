@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.aside`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
   background: #DCDCDC;
   display: flex;
   flex-direction: column;

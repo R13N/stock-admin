@@ -9,6 +9,7 @@ export const Container = styled.header`
 
   height: 8vh;
   padding: 0 5rem;
+  margin-left: 13rem;
 
   color: var(--primary);
 `
