@@ -1,4 +1,6 @@
-import { FiMoreVertical } from "react-icons/fi";
+import { FormEvent, useEffect, useState } from "react";
+import { FiEdit, FiSave } from "react-icons/fi";
+import { api } from "../../../../services/api";
 import { Container } from "./styles";
 
 interface IOutgoingProps {
@@ -8,34 +10,78 @@ interface IOutgoingProps {
   created_at: string;
 }
 
-export function Outgoing({ id, destination, type, created_at }: IOutgoingProps) {
+interface IUpdatedOutgoingProps {
+  id: string;
+  type: string;
+  destination: string
+  created_at: string;
+}
 
-  // const [isEditCategoryModalOpen, setIsEditCategoryModalOpen] = useState(false);
+export function Outgoing({ id, destination, created_at }: IOutgoingProps) {
 
+  const [isEdit, setIsEdit] = useState(false);
 
-  // function handleOpenEditCategoryModal() {
-  //   setIsEditCategoryModalOpen(true);
-  // }
+  const [updatedDestination, setUpdatedDestination] = useState('');
 
-  // function handleCloseEditCategoryModal() {
-  //   setIsEditCategoryModalOpen(false);
-  // }
+  const [outgoing, setOutgoing] = useState<IUpdatedOutgoingProps>(Object)
+
+  if(updatedDestination === '') {
+    setUpdatedDestination(outgoing?.destination)
+  }
+
+  function toggleOpenEdit() {
+    setIsEdit(!isEdit);
+  }
+
+  function onSubmitFormData(e: FormEvent) {
+    e.preventDefault();
+
+    api.put(`/orders/updateorder/${id}`, {id, "destination": updatedDestination})
+      .then(() => alert("Destino alterado com sucesso."))
+
+    setUpdatedDestination('');
+    updateList(id);
+    toggleOpenEdit();
+    window.location.reload();
+  }
+
+  function updateList(id: string) {
+    api.get(`/orders/${id}`)
+    .then(response => setOutgoing(response.data))
+  }
+
+  useEffect(() => {
+    updateList(id)
+  },[id])
 
   return (
     <Container>
-      {/* <EditCategoryModal
-        id={id}
-        isOpen={isEditCategoryModalOpen}
-        onRequestClose={handleCloseEditCategoryModal}
-      /> */}
+      
       <header>
-        <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
-        <span>{destination}</span>
+        {isEdit ?
+          <form onSubmit={onSubmitFormData}>
+            <span>Recebedor</span>
+            <input 
+              type="text"
+              defaultValue={outgoing.destination}
+              onChange={e => setUpdatedDestination(e.target.value)}
+            />
+            <button 
+              type="submit">
+              <FiSave size={24}/>
+            </button>
+          </form>
+          :
+          <div>
+            <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
+            <span>{destination}</span>
+          </div> 
+        }
       </header>
       <button
-        // onClick={handleOpenEditCategoryModal}
+        onClick={toggleOpenEdit}
       >
-        <FiMoreVertical size={24}/>
+        <FiEdit size={24}/>
       </button>
     </Container>
   )

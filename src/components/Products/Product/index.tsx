@@ -71,8 +71,8 @@ export function Product({id, name, description, unit, amount}: IProduct) {
     setUpdatedDescription('');
     setUpdatedAmount(0);
     setUpdatedUnit('');
-    toggleOpenEdit();
     updateList(id);
+    toggleOpenEdit();
     window.location.reload();
   }
 
@@ -96,7 +96,7 @@ export function Product({id, name, description, unit, amount}: IProduct) {
           onChange={e => setUpdatedName(e.target.value)}
         />
         <input 
-          type="text" 
+          type="text"
           defaultValue={product.description}
           onChange={e => setUpdatedDescription(e.target.value)}
         />

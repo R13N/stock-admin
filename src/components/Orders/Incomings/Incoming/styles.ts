@@ -20,12 +20,44 @@ export const Content = styled.div`
   }
 
   > header {
-    display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
+    
+    display: flex;
     width: 100%;
+
+    >div {
+      
+      display: grid;
+      grid-template-columns: 2fr 4fr 1fr;
+      width: 100%;
+    }
+
+    > form {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr;
+      gap: 0.5rem;
+      width: 100%;
+      margin-right: 1rem;
+  
+      > input {
+        padding: 0.5rem 1rem;
+        margin: 0.25rem 1rem 0.25rem 0;
+        border-radius: 0.25rem;
+        border: none;
+        
+        background: #DCDCDC;
+        font-size: 1rem;
+        width: 100%;
+        
+        &[type="number"] {
+          text-align: right;
+          padding-right: 0;
+        }
+      }
+    }
   }
 
-  > button {
+  
+  button {
     border: none;
     background: transparent;
     color: var(--primary);

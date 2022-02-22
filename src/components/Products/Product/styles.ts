@@ -16,26 +16,31 @@ export const Container = styled.div`
 
   > header {
     display: grid;
-    grid-template-columns: 6fr 16fr 4fr 3fr 1fr;
+    grid-template-columns: 4fr 10fr 4fr 2fr 1fr;
     gap: 0.5rem;
     width: 100%;
+    margin: 0 1rem 0.5rem 0;
+
+    /* span {
+      border-right:1px solid var(--primary);
+    } */
 
     span:last-child {
-      text-align: right;
+      text-align: end;
       padding-right: 24px;
     }
   }
 
   > form {
     display: grid;
-    grid-template-columns: 6fr 16fr 4fr 3fr 1fr;
+    grid-template-columns: 4fr 10fr 4fr 2fr 1fr;
+    /* grid-template-columns: 6fr 16fr 4fr 3fr 1fr; */
     gap: 0.5rem;
-    /* width: calc(100% - 24px); */
     margin-right: 1rem;
 
     > input {
-      padding: 0rem 1rem;
-      /* margin: 0 1rem 0.5rem 0; */
+      padding: 0.5rem 1rem;
+      margin: 0 1rem 0.5rem 0;
       border-radius: 0.25rem;
       border: none;
       
