@@ -21,7 +21,6 @@ export function NewCategoryModal({ isOpen, onRequestClose }: INewCategoryModalPr
     await api.post("/categories/newcategory", {name, description})
       .then(() => alert("Categoria criada com sucesso!"))
       .then(() => onRequestClose())
-      .catch(error => alert(error.message))
 
     setName('');
     setDescription('');

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiChevronDown, FiChevronUp, FiSave } from "react-icons/fi";
+import { FiSave } from "react-icons/fi";
 import { api } from "../../../../services/api";
 import { ProductOrder } from "../ProductOrder";
 
@@ -22,11 +22,6 @@ export function ListProductsOrder({id}:IListProductsOrderProps) {
   const [productAmount, setProductAmount] = useState(0);
 
   const [productsList, setProductsList] = useState<IProductOrderProps[]>([]);
-  const [isActive, setIsActive] = useState(false);
-
-  function toggleIsActive() {
-    setIsActive(!isActive);
-  }
 
   function onSubmitNewProductOrder() {
     api.post(`/orders/newproduct/${id}`, {id, "product_name": productName, "amount": productAmount})
@@ -47,14 +42,8 @@ export function ListProductsOrder({id}:IListProductsOrderProps) {
         <span>Unidade</span>
         <span>Quant.</span>
 
-        <button
-          onClick={toggleIsActive}
-        >
-          {isActive ? <FiChevronUp size={24}/> : <FiChevronDown size={24}/>}
-        </button>
-
       </header>
-      {productsList && isActive ? productsList.map(p => 
+      {productsList ? productsList.map(p => 
         <ProductOrder 
           key={p.id}
           productorder_id={p.id}

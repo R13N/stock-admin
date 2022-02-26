@@ -64,11 +64,15 @@ export const Content = styled.div`
 
   }
 
+  
   button {
     border: none;
     background: transparent;
     color: var(--primary);
+    
   }
-
-
+  
+  & :last-child {
+    margin-left: 0.5rem;
+  }
 `

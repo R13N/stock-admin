@@ -21,7 +21,7 @@ export function ListIncomings({incomings}: IIncomingsListProps) {
       <header>
         <span>Data</span>
         <span>Empresa</span>  
-        <span>NF</span>  
+        <span>NF</span>
       </header>
       <Content>
       {incomings? incomings.map(i => 

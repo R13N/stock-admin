@@ -22,20 +22,22 @@ export const Content = styled.div`
   > header {
     
     display: flex;
-    width: 100%;
+    /* width: 100%; */
+    width: calc(100% - 48px);
 
     >div {
       
       display: grid;
       grid-template-columns: 2fr 4fr 1fr;
-      width: 100%;
+      width: calc(100% - 48px);
     }
 
     > form {
       display: grid;
       grid-template-columns: 4fr 1fr 1fr;
       gap: 0.5rem;
-      width: 100%;
+      /* width: 100%;width: calc(100% - 48px); */
+      width: calc(100% - 48px);
       margin-right: 1rem;
   
       > input {
@@ -63,5 +65,8 @@ export const Content = styled.div`
     color: var(--primary);
   }
 
+  & :last-child {
+    margin-left: 0.5rem;
+  }
 
 `

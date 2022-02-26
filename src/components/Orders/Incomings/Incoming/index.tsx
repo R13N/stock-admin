@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { FiEdit, FiSave } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp, FiEdit, FiSave } from "react-icons/fi";
 import { api } from "../../../../services/api";
 import { ListProductsOrder } from "../../ProductsOrder/ListProductsOrder";
 import { Container, Content } from "./styles";
@@ -27,6 +27,12 @@ export function Incoming({ id, company, nf, created_at }: IIncomingProps) {
   const [updatedNF, setUpdatedNF] = useState('');
 
   const [incoming, setIncoming] = useState<IUpdatedIncomingProps>(Object)
+
+  const [isActive, setIsActive] = useState(false);
+
+  function toggleIsActive() {
+    setIsActive(!isActive);
+  }
 
   if(updatedCompany === '') {
     setUpdatedCompany(incoming?.company);
@@ -92,14 +98,23 @@ export function Incoming({ id, company, nf, created_at }: IIncomingProps) {
           }
         </header>
         <button
+          onClick={toggleIsActive}
+          >
+          {isActive ? <FiChevronUp size={24}/> : <FiChevronDown size={24}/>}
+        </button>
+        <button
           onClick={toggleOpenEdit}
           >
           <FiEdit size={24}/>
         </button>
       </Content>
-      <ListProductsOrder
-        id={id}
-      />
+      { isActive ?
+        <ListProductsOrder
+          id={id}
+        />
+        :
+        <></>
+      }
     </Container>
   )
 }
