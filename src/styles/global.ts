@@ -8,6 +8,10 @@ export const GlobalStyle = createGlobalStyle`
     --white: #FFFFFF;
     --gray: #666666;
     --gray-200: #D7D7D7;
+    --yellow: #fff200;
+
+    --side-bar-width: 9rem;
+    --header-height: 3rem;
   }
 
   * {
@@ -64,7 +68,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-
+    z-index: 100;
   }
 `
 
@@ -72,14 +76,5 @@ export const Main = styled.main`
   display: flex;
   flex-direction: row;
   height: 92vh;
-`
-
-export const Wrapper = styled.section`
-  /* background: #dd0000; */
-  padding: 2rem 7rem 13rem 7rem;
-  width: calc(100% - 13rem);
-  position: absolute;
-  right: 0;
-  overflow-y: hidden;
-  /* margin-bottom: 5rem; */
+  position: relative;
 `

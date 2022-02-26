@@ -1,23 +1,23 @@
-import MainRoutes from './routes';
-
 import { Header } from './components/Header';
 import { SideBar } from './components/SideBar';
+import { Wrapper } from './components/Wrapper';
 
-import { GlobalStyle, Main, Wrapper } from './styles/global';
+import { GlobalStyle, Main } from './styles/global';
+import { AuthProvider } from './context/AuthProvider';
 
 function App() {
+
   return (
-      <>
-        <GlobalStyle />
-        <Header />
-        <Main>
-          <SideBar />
-          <Wrapper>
-            <MainRoutes />
-          </Wrapper>
-        </Main>
-      </>
+    <AuthProvider>
+      <GlobalStyle />
+      <Header />
+      <Main>
+        <SideBar />
+        <Wrapper />
+      </Main>
+    </AuthProvider>
   );
+  
 }
 
 export default App;

@@ -1,7 +1,8 @@
 import { FormEvent, useEffect, useState } from "react";
 import { FiEdit, FiSave } from "react-icons/fi";
 import { api } from "../../../../services/api";
-import { Container } from "./styles";
+import { ListProductsOrder } from "../../ProductsOrder/ListProductsOrder";
+import { Container, Content } from "./styles";
 
 interface IOutgoingProps {
   id: string;
@@ -56,33 +57,37 @@ export function Outgoing({ id, destination, created_at }: IOutgoingProps) {
 
   return (
     <Container>
-      
-      <header>
-        {isEdit ?
-          <form onSubmit={onSubmitFormData}>
-            <span>Recebedor</span>
-            <input 
-              type="text"
-              defaultValue={outgoing.destination}
-              onChange={e => setUpdatedDestination(e.target.value)}
-            />
-            <button 
-              type="submit">
-              <FiSave size={24}/>
-            </button>
-          </form>
-          :
-          <div>
-            <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
-            <span>{destination}</span>
-          </div> 
-        }
-      </header>
-      <button
-        onClick={toggleOpenEdit}
-      >
-        <FiEdit size={24}/>
-      </button>
+      <Content>
+        <header>
+          {isEdit ?
+            <form onSubmit={onSubmitFormData}>
+              <span>Recebedor</span>
+              <input 
+                type="text"
+                defaultValue={outgoing.destination}
+                onChange={e => setUpdatedDestination(e.target.value)}
+              />
+              <button 
+                type="submit">
+                <FiSave size={24}/>
+              </button>
+            </form>
+            :
+            <div>
+              <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(created_at))}</span>
+              <span>{destination}</span>
+            </div> 
+          }
+        </header>
+        <button
+          onClick={toggleOpenEdit}
+        >
+          <FiEdit size={24}/>
+        </button>
+      </Content>
+      <ListProductsOrder
+        id={id}
+      />
     </Container>
   )
 }

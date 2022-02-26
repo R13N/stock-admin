@@ -78,7 +78,9 @@ export function Product({id, name, description, unit, amount}: IProduct) {
 
   function updateList(id: string) {
     api.get(`/products/${id}`)
-    .then(response => setProduct(response.data))
+    .then(response => {
+      setProduct(response.data)
+    })
   }
 
   useEffect(() => {

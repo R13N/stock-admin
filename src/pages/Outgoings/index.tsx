@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { ListOutgoings } from "../../components/Orders/Outgoings/ListOutgoings";
 import { NewOutgoingModal } from "../../components/Orders/Outgoings/NewOutgoingModal";
 import { api } from "../../services/api";
-import { Header } from "./styles";
+import { Container, Header } from "./styles";
 
 interface IOutgoingsProps {
   id: string;
@@ -59,7 +59,7 @@ export function Outgoings() {
   }, [])
 
   return (
-    <>
+    <Container>
       <NewOutgoingModal 
         isOpen={isNewOutgoingModalOpen}
         onRequestClose={handleCloseNewOutgoingModal}
@@ -85,6 +85,6 @@ export function Outgoings() {
       </Header>
       <ListOutgoings outgoings={filteredOutgoings}/>
       <Outlet />
-    </>
+    </Container>
   )
 }

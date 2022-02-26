@@ -5,7 +5,7 @@ import { ListProducts } from "../../components/Products/ListProducts";
 import { NewProductModal } from "../../components/Products/NewProductModal";
 import { api } from "../../services/api";
 
-import { Header } from './styles';
+import { Container, Header } from './styles';
 
 interface IProductProps {
   id: string;
@@ -62,7 +62,7 @@ export function Products() {
   }, [])
 
   return (
-    <>
+    <Container>
       <NewProductModal 
         isOpen={isNewProductModalOpen}
         onRequestClose={handleCloseNewProductModal} 
@@ -89,6 +89,6 @@ export function Products() {
       </Header>
       <ListProducts products={filteredProducts}/>
       <Outlet />
-    </>
+    </Container>
   )
 }

@@ -5,7 +5,7 @@ import { ListIncomings } from "../../components/Orders/Incomings/ListIncomings";
 import { NewIncomingModal } from "../../components/Orders/Incomings/NewIncomingModal";
 import { api } from "../../services/api";
 
-import { Header } from "./styles";
+import { Container, Header } from "./styles";
 
 interface IIncomingsProps {
   id: string;
@@ -62,7 +62,7 @@ export function Incomings() {
   }, [])
 
   return (
-    <>
+    <Container>
     <NewIncomingModal 
       isOpen={isNewIncomingModalOpen}
       onRequestClose={handleCloseNewIncomingModal}
@@ -88,6 +88,6 @@ export function Incomings() {
       </Header>
       <ListIncomings incomings={filteredIncomings}/>
       <Outlet />
-    </>
+    </Container>
   )
 }

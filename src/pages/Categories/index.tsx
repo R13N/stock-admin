@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { Outlet } from 'react-router-dom';
-import { EditCategoryModal } from '../../components/Categories/EditCategoryModal';
+// import { EditCategoryModal } from '../../components/Categories/EditCategoryModal';
 import { ListCategories } from '../../components/Categories/ListCategories';
 import { NewCategoryModal } from '../../components/Categories/NewCategoryModal';
 import { api } from '../../services/api';
 
-import { Header } from './styles';
+import { Container, Header } from './styles';
 
 interface ICategoryProps {
   id: string;
@@ -73,7 +73,7 @@ export function Categories() {
   }, [])
 
   return (
-    <>
+    <Container>
       <NewCategoryModal 
         isOpen={isNewCategoryModalOpen}
         onRequestClose={handleCloseNewCategoryModal} 
@@ -107,6 +107,6 @@ export function Categories() {
         // onOpenEditCategoryModal={handleOpenEditCategoryModal}
       />
       <Outlet />
-    </>
+    </Container>
   )
 }

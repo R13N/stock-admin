@@ -1,12 +1,14 @@
-import { SignInButton } from '../SignInButton';
+import { SignInField } from '../SignInField';
 
 import { Container } from './styles';
 
 export function Header() {
   return(
     <Container>
-      <h1>Controle de estoque</h1>
-      <SignInButton />
+      <div>
+        <span>Controle de estoque</span>
+      </div>
+      <SignInField />
     </Container>
   )
 }

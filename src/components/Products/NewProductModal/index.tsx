@@ -35,6 +35,7 @@ export function NewProductModal({ isOpen, onRequestClose }: INewProductModalProp
       onRequestClose={onRequestClose}
       overlayClassName= 'react-modal-overlay'
       className= 'react-modal-content'
+      ariaHideApp={false}
     >
         <Container>
           <Form onSubmit={submitFormData}>
