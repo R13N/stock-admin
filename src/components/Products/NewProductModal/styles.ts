@@ -3,11 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-
   padding: 2rem;
-
   border-radius: 0.25rem;
-  
   background: var(--gray-200);
   color: #7A7A7A;
 `
@@ -50,7 +47,6 @@ export const Form = styled.form`
 
 export const Row = styled.div`
   display: grid;
-  /* flex-direction: row; */
   grid-template-columns: 1fr 4fr;
   align-items: end;
   
@@ -58,14 +54,18 @@ export const Row = styled.div`
     padding-top: 1.25rem;
   }
   
+  & select,
   & textarea,
   & input {
-    /* margin-left: 1rem; */
     padding: 0.5rem 1rem;
     
     border: none;
     border-radius: 0.25rem;
     font-size: 1rem;
     width: 100%;
+  }
+
+  & select {
+    background: var(--white);
   }
 `

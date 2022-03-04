@@ -1,9 +1,16 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { FiSave } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { api } from '../../../services/api';
 
 import { Container, Form, Row } from './styles';
+
+interface ICategoryProps {
+  id: string;
+  name: string;
+  description: string;
+  created_at: string;
+}
 
 interface INewProductModalProps {
   isOpen: boolean;
@@ -16,6 +23,7 @@ export function NewProductModal({ isOpen, onRequestClose }: INewProductModalProp
   const [description, setDescription] = useState('');
   const [unit, setUnit] = useState('');
   const [categoryName, setCategoryName] = useState('');
+  const [categories, setCategories] = useState<ICategoryProps[]>([]);
 
   async function submitFormData(event: FormEvent) {
     event.preventDefault();
@@ -28,6 +36,11 @@ export function NewProductModal({ isOpen, onRequestClose }: INewProductModalProp
     setName('');
     setDescription('');
   }
+
+  useEffect(() => {
+    api.get("/categories/filter")
+      .then(res =>  setCategories(res.data))
+  }, [])
 
   return(
     <Modal
@@ -51,14 +64,24 @@ export function NewProductModal({ isOpen, onRequestClose }: INewProductModalProp
               />
             </Row>
             <Row>
-              <label htmlFor="category_name">Categoria</label>
+              {/* <label htmlFor="category_name">Categoria</label>
               <input
                 type="text" 
                 name="category_name" 
                 id="category_name"
                 placeholder='A categoria deve estar cadastrada previamente.'
                 onChange={event => setCategoryName(event.target.value)}
-              />
+              /> */}
+
+              <label htmlFor="categories">Categoria</label>
+              <select name="categories" id="categories" onChange={event => setCategoryName(event.target.value)}>
+                {
+                  categories.map( category => 
+                    <option key={category.id} value={category.name}>{category.name}</option>
+                  )
+                }
+              </select>
+
             </Row>
             <Row>
               <label htmlFor="unit">Unidade</label>
