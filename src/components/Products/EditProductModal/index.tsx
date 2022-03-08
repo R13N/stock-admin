@@ -33,12 +33,6 @@ export function EditProductModal({ id, isOpen, onRequestClose }: IEditProductMod
   const [amount, setAmount] = useState(0);
   const [foundProduct, setFoundProduct] = useState<IProduct>(Object);
   
-  console.log("name: " + name);
-  console.log("description: " + description);
-  console.log("unit: " + unit);
-  console.log("categoryName: " + categoryName);
-  console.log("amount: " + amount);
-
   if(categoryName === '') {
     setCategoryName(foundProduct?.category?.name)
   }

@@ -47,9 +47,7 @@ export function Incomings() {
   async function updateList() {
     await api.get("/orders/filter", { params: {"type": "entrada"} })
     .then(response => setIncomings(response.data))
-    // .then(response => console.log(response))
   }
-  // console.log(incomings)
 
   useEffect(() => {
     if(filterValue === ""){

@@ -44,9 +44,7 @@ export function Outgoings() {
   async function updateList() {
     await api.get("/orders/filter", { params: {"type": "saida"}})
     .then(response => setOutgoings(response.data))
-    // .then(response => console.log(response))
   }
-  // console.log(outgoings)
 
   useEffect(() => {
     if(filterValue === ""){

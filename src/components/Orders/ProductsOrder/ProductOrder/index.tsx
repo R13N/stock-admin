@@ -32,7 +32,6 @@ export function ProductOrder({ productorder_id, product_id, amount }: IProductOr
         .then(() => alert(`Entrada do produto ${product?.name} excluída com sucesso!`))
         .then(() => window.location.reload())
     }
-    // console.log(productorder_id);
   }
   
   useEffect(() => {

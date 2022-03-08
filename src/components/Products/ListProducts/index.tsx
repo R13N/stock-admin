@@ -16,8 +16,6 @@ interface IProductsListProps {
 
 export function ListProducts({products}: IProductsListProps) {
 
-  console.log(products);
-
   return (
     <Container>
       <header>

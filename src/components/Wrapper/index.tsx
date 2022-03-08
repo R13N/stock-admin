@@ -7,8 +7,6 @@ export function Wrapper() {
 
   const auth = useAuth();
 
-  console.log(auth.isLoggedIn);
-
   return auth.isLoggedIn ? 
     (
       <MainRoutes />

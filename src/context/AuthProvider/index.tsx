@@ -20,15 +20,12 @@ export function AuthProvider({ children }: IAuthProvider) {
     } else {
       setIsLoggedIn(false);
     }
-    console.log(isLoggedIn);
   }
-  console.log(isLoggedIn);
   
   function logout () {
     setUser(null);
     setUserLocalStorage(null);
     setIsLoggedIn(false);
-    console.log(isLoggedIn);
   }
 
   useEffect(() =>{

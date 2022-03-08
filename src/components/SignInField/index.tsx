@@ -22,9 +22,6 @@ export function SignInField() {
     setUserPasswordLogin('');
   }
 
-  
-  console.log(auth.isLoggedIn);
-
   return (
     auth.isLoggedIn ? (
       <Container>
