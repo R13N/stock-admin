@@ -5,24 +5,29 @@ import { api } from "../../../services/api";
 
 import { Container } from './styles';
 
-interface IProduct {
+interface IProductProps {
   id: string;
   name: string;
   description?: string;
   unit?: string;
   amount?: number;
 }
-
+interface ICategory {
+  id: string;
+  name: string;
+  description: string;
+  created_at: string;
+}
 interface IUpdatedProduct {
   id: string;
   name: string;
   description: string;
   unit: string;
   amount: number;
-  categoryName: string;
+  category: ICategory;
 }
 
-export function Product({id, name, description, unit, amount}: IProduct) {
+export function Product({id, amount, description, name, unit}: IProductProps) {
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -63,7 +68,7 @@ export function Product({id, name, description, unit, amount}: IProduct) {
       "description": updatedDescription,
       "amount": updatedAmount,
       "unit": updatedUnit,
-      "category_name": product.categoryName
+      "category_name": product.category.name
     })
     .then(() => alert("Produto alterado com sucesso!"))
 
